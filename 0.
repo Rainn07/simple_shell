@@ -1,0 +1,46 @@
+#include <stdio.h>
+
+#define MAX(b, c) ((b) > (c) ? (b) : (c)
+
+typedef struct {
+    int x;
+    int y;
+} Point;
+
+void swap(int *b, int *c) {
+    int temp = *b;
+    *b = *c;
+    *c = temp;
+}
+
+int add(int b, int c) {
+    return b + c;
+}
+
+int main() {
+    Point p1, p2;
+    p1.x = 20;
+    p1.y = 40;
+
+    p2.x = 60;
+    p2.y = 80;
+
+    printf("p1.x: %d, p1.y: %d\n", p1.x, p1.y);
+    printf("p2.x: %d, p2.y: %d\n", p2.x, p2.y);
+
+    int a = 10;
+    int b = 20;
+
+    printf("Before swapping: b = %d, c = %d\n", b, c);
+    swap(&a, &b);
+    printf("After swapping: b = %d, c = %d\n", b, c);
+
+    int result = add(b, c);
+    printf("The sum of b and c is %d\n", result);
+
+    int max = MAX(b, c);
+    printf("The maximum of b and c is %d\n", max);
+
+    return 0;
+}
+
