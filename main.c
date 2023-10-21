@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
 	if (argc == 1)
 		run_shell();
 	else if (argc == 2)
-		run_non_interactive_shell(argv[1]);
+		non_interactive_shell(argv[1]);
 	else
 		fprintf(stderr, "Usage: %s [script]\n", argv[0]);
 

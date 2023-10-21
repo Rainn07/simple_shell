@@ -5,6 +5,7 @@
  *	of shell related functions
  */
 
+#include <stdlib.h>
 #include "shell.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -44,20 +45,22 @@ void parse_input(char *input, char **arguments)
 }
 
 /**
- * process_execute - processes command and execute
+ * process_and_execute - processes command and execute
  * @command: the command from the cmd line
  */
 
 void process_and_execute(char *command)
 {
 	char *arguments[MAX_ARGUMENTS];
+	pid_t child_pid;
+
 	parse_input(command, arguments);
 
 	if (arguments[0] == NULL)
 		return;
 
 	/* Fork a child process */
-	pid_t child_pid = fork();
+	child_pid = fork();
 
 	if (child_pid == -1)
 	{
@@ -77,6 +80,7 @@ void process_and_execute(char *command)
 		{
 			/* Parent process */
 			int status;
+
 			waitpid(child_pid, &status, 0);
 		}
 	}
@@ -107,5 +111,28 @@ void run_shell(void)
 
 		if (!isatty(STDIN_FILENO))
 			break;
+	}
+}
+
+/**
+ * non_interactive_shell - !isatty
+ * @filename: script to be ran
+ */
+void non_interactive_shell(const char *filename)
+{
+	FILE *script;
+	char line[MAX_COMMAND_LENGTH];
+
+	script = fopen(filename, "r");
+	if (script == NULL)
+	{
+		perror("Script open failed");
+		exit(1);
+	}
+
+	while (fgets(line, sizeof(line), script) != NULL)
+	{
+		/* Process and execute the command */
+		process_and_execute(line);
 	}
 }
