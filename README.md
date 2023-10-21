@@ -5,3 +5,8 @@ A **shell** is a program that acts as an interface between the user and the oper
 1. Command-line interface, such as *Bash*.
 2. Graphical user interface, such as *Windows Office*.
 
+##Implementation
+The program first estabilishes whether it is working in interactive or non-interactive mode and based on that runs as follows:
+###Interactive mode
+
+###Non-interactive mode
